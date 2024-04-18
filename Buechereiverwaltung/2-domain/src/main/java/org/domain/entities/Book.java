@@ -2,6 +2,7 @@ package org.domain.entities;
 
 import org.domain.valueObjects.BookId;
 import org.domain.valueObjects.ISBN;
+import org.domain.valueObjects.LoanAgreementId;
 import org.domain.valueObjects.Name;
 
 public class Book {
@@ -9,6 +10,7 @@ public class Book {
     private final ISBN isbn;
     private final String title;
     private final Name author;
+    private LoanAgreementId loanAgreementId;
 
     public Book(String isbn, String title, String authorName, String authorSurname) {
         this.id = new BookId();
@@ -42,5 +44,17 @@ public class Book {
     }
     public BookId getId() {
         return this.id;
+    }
+
+    public LoanAgreementId getLoanAgreementId() {
+        return this.loanAgreementId;
+    }
+
+    public void registerLoanAgreementId(LoanAgreementId loanAgreementId) {
+        this.loanAgreementId = loanAgreementId;
+    }
+
+    public void returnBook() {
+        this.loanAgreementId = null;
     }
 }
