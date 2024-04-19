@@ -44,4 +44,5 @@ public class User {
         }
         this.loanAgreementIdList.remove(loanAgreementId);
     }
+
 }

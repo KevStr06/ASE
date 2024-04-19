@@ -4,6 +4,9 @@ import org.domain.entities.User;
 import org.domain.repositories.UserRepository;
 import org.domain.valueObjects.UserId;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserManagementService {
     private final UserRepository userRepository;
 
@@ -25,6 +28,10 @@ public class UserManagementService {
         for (User user: userRepository.listAll()) {
             userRepository.remove(user);
         }
+    }
+
+    public List<User> getAllUsers() {
+        return new ArrayList<>(userRepository.listAll());
     }
 
 }
