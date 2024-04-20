@@ -12,6 +12,7 @@
         <module>0-plugins/0-persistence</module>
         <module>1-application</module>
         <module>2-domain</module>
+        <module>0-plugins/0-presentation</module>
     </modules>
 
     <properties>
