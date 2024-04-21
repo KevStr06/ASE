@@ -11,7 +11,9 @@ import org.domain.valueObjects.BookId;
 import org.domain.valueObjects.LoanAgreementId;
 import org.domain.valueObjects.UserId;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LoanAgreementManagementService {
     private final LoanAgreementRepository loanAgreementRepository;
@@ -55,4 +57,29 @@ public class LoanAgreementManagementService {
         return loanAgreement.getDaysUntilReturnDate();
     }
 
+    public List<LoanAgreementId> getLoanAgreementIdsByUserId(UserId userId) {
+        List<LoanAgreementId> loanAgreementIds = new ArrayList<>();
+        for (LoanAgreement loanAgreement : loanAgreementRepository.findByUserId(userId)) {
+            loanAgreementIds.add(loanAgreement.getLoanAgreementId());
+        }
+        return loanAgreementIds;
+    }
+
+    public List<LoanAgreementId> getLoanAgreementIdsByBookId(BookId bookId) {
+        List<LoanAgreementId> loanAgreementIds = new ArrayList<>();
+        for (LoanAgreement loanAgreement : loanAgreementRepository.findByBookId(bookId)) {
+            loanAgreementIds.add(loanAgreement.getLoanAgreementId());
+        }
+        return loanAgreementIds;
+    }
+
+    public BookId getBookId(LoanAgreementId loanAgreementId) {
+        LoanAgreement loanAgreement = loanAgreementRepository.findByLoanAgreementId(loanAgreementId);
+        return loanAgreement.getBookId();
+    }
+
+    public UserId getUserId(LoanAgreementId loanAgreementId) {
+        LoanAgreement loanAgreement = loanAgreementRepository.findByLoanAgreementId(loanAgreementId);
+        return loanAgreement.getUserId();
+    }
 }

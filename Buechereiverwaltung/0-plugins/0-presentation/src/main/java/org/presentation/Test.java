@@ -30,13 +30,17 @@ public class Test {
         UserId userId2 = userManagementService.createUser("Daniel","Von");
         BookId bookId1 = bookManagementService.createBook("978-3-7375-0553-6","Test","Kevin","Ich");
         BookId bookId2 = bookManagementService.createBook("978-3-7375-0553-8", "Testen","Simon","Lapp");
+        BookId bookId3 = bookManagementService.createBook("978-3-7375-0553-9", "Schreiben","Simon","Lapp");
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2024, Calendar.MAY, 17);
         Date dateToCheck = calendar.getTime();
         LoanAgreementId loanAgreementId1 = loanAgreementManagementService.createLoanAgreement(userId1,bookId1,dateToCheck);
         LoanAgreementId loanAgreementId2 = loanAgreementManagementService.createLoanAgreement(userId1,bookId2,dateToCheck);
-        System.out.println(loanAgreementManagementService.getDaysUntilReturnDateByLoanAgreementId(loanAgreementId1));
+        loanAgreementManagementService.returnBook(loanAgreementId2, userId1, bookId2);
+        LoanAgreementId loanAgreementId3 = loanAgreementManagementService.createLoanAgreement(userId2,bookId2,dateToCheck);
+
+
 
     }
 }

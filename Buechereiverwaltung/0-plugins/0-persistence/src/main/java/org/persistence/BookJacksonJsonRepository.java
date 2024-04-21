@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BookJacksonJsonRepository implements BookRepository {
 
-    private final List<Book> books = new ArrayList<Book>();
+    private final List<Book> books = new ArrayList<>();
     @Override
     public List<Book> listAll() {
         return new ArrayList<>(books);
@@ -22,6 +22,13 @@ public class BookJacksonJsonRepository implements BookRepository {
                 .filter(book -> book.getId().equals(bookId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public List<Book> findByAuthor(String authorName, String authorSurname) {
+        return books.stream()
+                .filter(book -> book.getAuthorFullName().equals(authorName+" "+authorSurname))
+                .toList();
     }
 
     @Override

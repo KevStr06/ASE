@@ -34,4 +34,16 @@ public class UserManagementService {
         return new ArrayList<>(userRepository.listAll());
     }
 
+    public String getUserNameById(UserId userId) {
+        return userRepository.findByUserId(userId).getName();
+    }
+
+    public String getUserSurnameById(UserId userId) {
+        return userRepository.findByUserId(userId).getSurname();
+    }
+
+    public String getUsersFullNameById(UserId userId) {
+        return userRepository.findByUserId(userId).getFullName();
+    }
+
 }

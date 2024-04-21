@@ -33,4 +33,32 @@ public class BookManagementService {
     public List<Book> getAllBooks() {
         return new ArrayList<Book>(bookRepository.listAll());
     }
+
+    public String getBookTitleById(BookId bookId) {
+        Book book = bookRepository.findByBookId(bookId);
+        return book.getTitle();
+    }
+
+    public String getBookAuthorsNameById(BookId bookId) {
+        Book book = bookRepository.findByBookId(bookId);
+        return book.getAuthorName();
+    }
+
+    public String getBookAuthorsSurnameById(BookId bookId) {
+        Book book = bookRepository.findByBookId(bookId);
+        return book.getAuthorSurname();
+    }
+
+    public String getBookAuthorsFullNameById(BookId bookId) {
+        Book book = bookRepository.findByBookId(bookId);
+        return book.getAuthorFullName();
+    }
+
+    public List<BookId> getBookIdsByAuthorName(String authorName, String authorSurname) {
+        List<BookId> bookIds = new ArrayList<>();
+        for (Book book : bookRepository.findByAuthor(authorName, authorSurname)) {
+            bookIds.add(book.getId());
+        }
+        return bookIds;
+    }
 }
