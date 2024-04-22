@@ -15,7 +15,7 @@ public class Book {
     public Book(String isbn, String title, String authorName, String authorSurname) {
         this.id = new BookId();
         this.isbn = new ISBN(isbn);
-        this.title = title;
+        this.title = validateTitle(title);
         this.author = new Name(authorName, authorSurname);
     }
 
@@ -30,18 +30,23 @@ public class Book {
     public ISBN getISBN() {
         return this.isbn;
     }
+
     public String getTitle() {
         return this.title;
     }
+
     public String getAuthorFullName() {
         return this.author.getFullName();
     }
+
     public String getAuthorSurname() {
         return this.author.getSurname();
     }
+
     public String getAuthorName(){
         return this.author.getName();
     }
+
     public BookId getId() {
         return this.id;
     }

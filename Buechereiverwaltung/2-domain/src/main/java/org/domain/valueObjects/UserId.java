@@ -21,4 +21,16 @@ public class UserId {
         UserId userId = (UserId) o;
         return Objects.equals(id, userId.id);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "UserId{" +
+                "id=" + id +
+                '}';
+    }
 }

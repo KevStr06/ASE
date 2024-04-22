@@ -2,6 +2,7 @@ package org.domain.valueObjects;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class ReturnDate {
@@ -27,5 +28,25 @@ public class ReturnDate {
         Date currentDate = new Date();
         long diffInMillies = returnDate.getTime() - currentDate.getTime();
         return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ReturnDate that = (ReturnDate) o;
+        return Objects.equals(returnDate, that.returnDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(returnDate);
+    }
+
+    @Override
+    public String toString() {
+        return "ReturnDate{" +
+                "returnDate=" + returnDate +
+                '}';
     }
 }

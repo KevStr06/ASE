@@ -34,8 +34,20 @@ public class ISBN {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ISBN isbnNew = (ISBN) o;
-        return Objects.equals(isbn, isbnNew.isbn);
+        ISBN isbn1 = (ISBN) o;
+        return Objects.equals(isbn, isbn1.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(isbn);
+    }
+
+    @Override
+    public String toString() {
+        return "ISBN{" +
+                "isbn='" + isbn + '\'' +
+                '}';
     }
 }
 

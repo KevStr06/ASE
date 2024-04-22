@@ -18,7 +18,19 @@ public class LoanAgreementId {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LoanAgreementId loanAgreementId = (LoanAgreementId) o;
-        return Objects.equals(id, loanAgreementId.id);
+        LoanAgreementId that = (LoanAgreementId) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "LoanAgreementId{" +
+                "id=" + id +
+                '}';
     }
 }

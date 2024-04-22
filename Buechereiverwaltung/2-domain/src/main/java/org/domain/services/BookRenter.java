@@ -24,6 +24,6 @@ public class BookRenter {
             throw new IllegalArgumentException("Not the right book");
         }
         book.returnBook();
-        user.registerLoanAgreementId(loanAgreementId);
+        user.returnBookByLoanAgreementId(loanAgreementId);
     }
 }

@@ -38,4 +38,6 @@ public class Name {
         Name nameNew = (Name) o;
         return Objects.equals(name, nameNew.name) && Objects.equals(surname, nameNew.surname);
     }
+
+
 }

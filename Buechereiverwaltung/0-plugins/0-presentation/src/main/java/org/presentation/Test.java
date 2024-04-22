@@ -40,7 +40,9 @@ public class Test {
         loanAgreementManagementService.returnBook(loanAgreementId2, userId1, bookId2);
         LoanAgreementId loanAgreementId3 = loanAgreementManagementService.createLoanAgreement(userId2,bookId2,dateToCheck);
 
-
+        userManagementService.registerBookmarkToUserById(bookId1, userId1);
+        userManagementService.registerBookmarkToUserById(bookId2, userId1);
+        System.out.println( userManagementService.getBookmarksFromUserById(userId1));
 
     }
 }
