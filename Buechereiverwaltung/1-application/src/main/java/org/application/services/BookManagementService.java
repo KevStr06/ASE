@@ -30,8 +30,12 @@ public class BookManagementService {
         }
     }
 
-    public List<Book> getAllBooks() {
-        return new ArrayList<Book>(bookRepository.listAll());
+    public List<BookId> getAllBookIds() {
+        List<BookId> bookIds = new ArrayList<>();
+        for (Book book : bookRepository.listAll()) {
+            bookIds.add(book.getId());
+        }
+        return bookIds;
     }
 
     public String getBookTitleById(BookId bookId) {

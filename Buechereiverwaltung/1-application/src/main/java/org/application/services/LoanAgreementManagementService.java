@@ -56,6 +56,14 @@ public class LoanAgreementManagementService {
         }
     }
 
+    public List<LoanAgreementId> getAllLoanAgreementIds() {
+        List<LoanAgreementId> loanAgreementIds = new ArrayList<>();
+        for (LoanAgreement loanAgreement : loanAgreementRepository.listAll()) {
+            loanAgreementIds.add(loanAgreement.getLoanAgreementId());
+        }
+        return loanAgreementIds;
+    }
+
     public long getDaysUntilReturnDateByLoanAgreementId(LoanAgreementId loanAgreementId) {
         LoanAgreement loanAgreement = loanAgreementRepository.findByLoanAgreementId(loanAgreementId);
         return loanAgreement.getDaysUntilReturnDate();
@@ -77,12 +85,12 @@ public class LoanAgreementManagementService {
         return loanAgreementIds;
     }
 
-    public BookId getBookId(LoanAgreementId loanAgreementId) {
+    public BookId getBookIdByLoanAgreementId(LoanAgreementId loanAgreementId) {
         LoanAgreement loanAgreement = loanAgreementRepository.findByLoanAgreementId(loanAgreementId);
         return loanAgreement.getBookId();
     }
 
-    public UserId getUserId(LoanAgreementId loanAgreementId) {
+    public UserId getUserIdByLoanAgreementId(LoanAgreementId loanAgreementId) {
         LoanAgreement loanAgreement = loanAgreementRepository.findByLoanAgreementId(loanAgreementId);
         return loanAgreement.getUserId();
     }

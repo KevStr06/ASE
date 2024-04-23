@@ -35,8 +35,12 @@ public class UserManagementService {
         }
     }
 
-    public List<User> getAllUsers() {
-        return new ArrayList<>(userRepository.listAll());
+    public List<UserId> getAllUserIds() {
+        List<UserId> userIds = new ArrayList<>();
+        for (User user: userRepository.listAll()) {
+            userIds.add(user.getId());
+        }
+        return userIds;
     }
 
     public String getUserNameById(UserId userId) {

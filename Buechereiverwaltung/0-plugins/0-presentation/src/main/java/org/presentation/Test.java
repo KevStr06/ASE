@@ -58,11 +58,11 @@ public class Test {
         bookManagementService.loadBooks();
         loanAgreementManagementService.loadLoanAgreements();
 
-        List<User> users = userManagementService.getAllUsers();
+        List<UserId> userIds = userManagementService.getAllUserIds();
 
-        for (User user : users) {
-            System.out.println(user.getFullName());
-            List<LoanAgreementId> loanAgreementIdList = loanAgreementManagementService.getLoanAgreementIdsByUserId(user.getId());
+        for (UserId userId : userIds) {
+            System.out.println(userManagementService.getUsersFullNameById(userId));
+            List<LoanAgreementId> loanAgreementIdList = loanAgreementManagementService.getLoanAgreementIdsByUserId(userId);
             for (LoanAgreementId loanAgreementId : loanAgreementIdList) {
                 System.out.println(loanAgreementId);
             }
