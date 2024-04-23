@@ -61,4 +61,9 @@ public class BookManagementService {
         }
         return bookIds;
     }
+
+    public void saveBooks() {
+        bookRepository.save();
+    }
+
 }

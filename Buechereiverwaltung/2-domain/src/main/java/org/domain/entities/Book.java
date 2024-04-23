@@ -1,14 +1,20 @@
 package org.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.domain.valueObjects.BookId;
 import org.domain.valueObjects.ISBN;
 import org.domain.valueObjects.LoanAgreementId;
 import org.domain.valueObjects.Name;
 
+import java.util.SplittableRandom;
+
 public class Book {
     private final BookId id;
     private final ISBN isbn;
     private final String title;
+    @JsonProperty ("author")
     private final Name author;
     private LoanAgreementId loanAgreementId;
 
@@ -17,6 +23,21 @@ public class Book {
         this.isbn = new ISBN(isbn);
         this.title = validateTitle(title);
         this.author = new Name(authorName, authorSurname);
+    }
+
+    @JsonCreator
+    private Book(
+            @JsonProperty("id") BookId id,
+            @JsonProperty("isbn") ISBN isbn,
+            @JsonProperty("title") String title,
+            @JsonProperty("author") Name author,
+            @JsonProperty("loanAgreementId") LoanAgreementId loanAgreementId
+            ) {
+        this.id = id;
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.loanAgreementId = loanAgreementId;
     }
 
     private String validateTitle(String title){
@@ -35,14 +56,17 @@ public class Book {
         return this.title;
     }
 
+    @JsonIgnore
     public String getAuthorFullName() {
         return this.author.getFullName();
     }
 
+    @JsonIgnore
     public String getAuthorSurname() {
         return this.author.getSurname();
     }
 
+    @JsonIgnore
     public String getAuthorName(){
         return this.author.getName();
     }

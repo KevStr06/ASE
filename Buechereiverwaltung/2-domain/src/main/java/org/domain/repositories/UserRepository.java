@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserRepository {
     List<User> listAll();
     User findByUserId(UserId userId);
-    void save(User user);
+    void save();
     void remove(User user);
     void add (User user);
     void load ();

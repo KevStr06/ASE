@@ -16,16 +16,20 @@ import org.persistence.UserJacksonJsonRepository;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class Test {
     public static void main(String[] args) {
+
         BookJacksonJsonRepository bookJacksonJsonRepository = new BookJacksonJsonRepository();
         LoanAgreementJacksonRepository loanAgreementJacksonRepository = new LoanAgreementJacksonRepository();
         UserJacksonJsonRepository userJacksonJsonRepository = new UserJacksonJsonRepository();
         BookManagementService bookManagementService = new BookManagementService(bookJacksonJsonRepository);
         UserManagementService userManagementService = new UserManagementService(userJacksonJsonRepository);
         LoanAgreementManagementService loanAgreementManagementService = new LoanAgreementManagementService(loanAgreementJacksonRepository,userJacksonJsonRepository,bookJacksonJsonRepository);
+        /*
+
         UserId userId1 = userManagementService.createUser("Tim","Lol");
         UserId userId2 = userManagementService.createUser("Daniel","Von");
         BookId bookId1 = bookManagementService.createBook("978-3-7375-0553-6","Test","Kevin","Ich");
@@ -42,7 +46,29 @@ public class Test {
 
         userManagementService.registerBookmarkToUserById(bookId1, userId1);
         userManagementService.registerBookmarkToUserById(bookId2, userId1);
-        System.out.println( userManagementService.getBookmarksFromUserById(userId1));
+
+        userManagementService.saveUsers();
+        bookManagementService.saveBooks();
+        loanAgreementManagementService.saveLoanAgreements();
+
+
+
+         */
+        userManagementService.loadUsers();
+        bookManagementService.loadBooks();
+        loanAgreementManagementService.loadLoanAgreements();
+
+        List<User> users = userManagementService.getAllUsers();
+
+        for (User user : users) {
+            System.out.println(user.getFullName());
+            List<LoanAgreementId> loanAgreementIdList = loanAgreementManagementService.getLoanAgreementIdsByUserId(user.getId());
+            for (LoanAgreementId loanAgreementId : loanAgreementIdList) {
+                System.out.println(loanAgreementId);
+            }
+        }
+
+
 
     }
 }

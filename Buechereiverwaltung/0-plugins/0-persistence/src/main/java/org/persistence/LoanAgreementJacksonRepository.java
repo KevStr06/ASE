@@ -1,5 +1,8 @@
 package org.persistence;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.domain.entities.LoanAgreement;
 import org.domain.entities.User;
 import org.domain.repositories.LoanAgreementRepository;
@@ -7,6 +10,9 @@ import org.domain.valueObjects.BookId;
 import org.domain.valueObjects.LoanAgreementId;
 import org.domain.valueObjects.UserId;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +47,17 @@ public class LoanAgreementJacksonRepository implements LoanAgreementRepository {
     }
 
     @Override
-    public void save(LoanAgreement loanAgreement) {
+    public void save() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
 
+        try (var writer = new FileWriter("loanAgreements.save", true)) {
+            String jsonString = mapper.writeValueAsString(loanAgreements);
+
+            writer.write(jsonString);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -57,6 +72,15 @@ public class LoanAgreementJacksonRepository implements LoanAgreementRepository {
 
     @Override
     public void load() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
 
+        try (var reader = new FileReader("loanAgreements.save")) {
+            List<LoanAgreement> loadedLoanAgreements = mapper.readValue(reader, new TypeReference<List<LoanAgreement>>() {});
+            loanAgreements.clear();
+            loanAgreements.addAll(loadedLoanAgreements);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

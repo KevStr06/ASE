@@ -1,5 +1,8 @@
 package org.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.domain.valueObjects.BookId;
 import org.domain.valueObjects.LoanAgreementId;
 import org.domain.valueObjects.Name;
@@ -7,31 +10,46 @@ import org.domain.valueObjects.UserId;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class User {
     private final UserId id;
-    private final Name name;
+    @JsonProperty ("userName")
+    private final Name userName;
     private List<LoanAgreementId> loanAgreementIdList;
+    @JsonProperty ("bookmark")
     private Bookmark bookmark;
 
     public User(String name, String surname) {
         this.id = new UserId();
-        this.name = new Name(name, surname);
+        this.userName = new Name(name, surname);
         this.loanAgreementIdList = new ArrayList<>();
         this.bookmark = new Bookmark();
     }
-
+    @JsonCreator
+    private User(
+            @JsonProperty ("id") UserId id,
+            @JsonProperty ("userName") Name name,
+            @JsonProperty ("loanAgreementIdList") List<LoanAgreementId> loanAgreementIdList,
+            @JsonProperty ("bookmark") Bookmark bookmark)
+            {
+        this.id = id;
+        this.userName = name;
+        this.loanAgreementIdList = loanAgreementIdList;
+        this.bookmark = bookmark;
+    }
+    @JsonIgnore
     public String getName() {
-        return name.getName();
+        return userName.getName();
     }
 
+    @JsonIgnore
     public String getSurname() {
-        return name.getSurname();
+        return userName.getSurname();
     }
 
+    @JsonIgnore
     public String getFullName() {
-        return name.getFullName();
+        return userName.getFullName();
     }
 
     public UserId getId() {
@@ -56,6 +74,7 @@ public class User {
         bookmark.removeBookmark(bookId);
     }
 
+    @JsonIgnore
     public List<BookId> getBookmarks() {
         List<BookId> bookmarks = bookmark.getBookmarks();
         return bookmarks;

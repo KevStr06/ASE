@@ -1,11 +1,16 @@
 package org.domain.valueObjects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class ISBN {
     private String isbn;
 
-    public ISBN(String isbn) {
+    @JsonCreator
+    public ISBN(
+            @JsonProperty ("isbn") String isbn) {
         this.isbn = validateIsbn(isbn);
     }
 

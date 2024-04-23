@@ -42,8 +42,12 @@ public class LoanAgreementManagementService {
         loanAgreementRepository.remove(loanAgreement);
     }
 
-    public void loadLoanAgreement() {
+    public void loadLoanAgreements() {
         loanAgreementRepository.load();
+    }
+
+    public void saveLoanAgreements(){
+        loanAgreementRepository.save();
     }
 
     public void clearAllLoanAgreements() {

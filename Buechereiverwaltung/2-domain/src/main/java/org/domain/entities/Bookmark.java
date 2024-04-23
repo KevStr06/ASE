@@ -1,5 +1,7 @@
 package org.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.domain.valueObjects.BookId;
 
 import java.util.ArrayList;
@@ -10,6 +12,13 @@ public class Bookmark {
 
     public Bookmark() {
         bookmarks = new ArrayList<>();
+    }
+
+    @JsonCreator
+    private Bookmark(
+            @JsonProperty ("bookmarks") List<BookId> bookmarks
+    ) {
+        this.bookmarks = new ArrayList<>(bookmarks);
     }
 
     public void registerBookmark(BookId bookmark) {

@@ -25,6 +25,10 @@ public class UserManagementService {
         userRepository.load();
     }
 
+    public void saveUsers(){
+        userRepository.save();
+    }
+
     public void clearAllUsers(){
         for (User user: userRepository.listAll()) {
             userRepository.remove(user);

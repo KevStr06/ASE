@@ -9,7 +9,7 @@ public interface BookRepository {
     List<Book> listAll();
     Book findByBookId(BookId bookId);
     List<Book> findByAuthor(String authorName, String authorSurname);
-    void save(Book book);
+    void save();
     void remove(Book book);
     void add (Book book);
     void load ();

@@ -12,7 +12,7 @@ public interface LoanAgreementRepository {
     LoanAgreement findByLoanAgreementId(LoanAgreementId loanAgreementId);
     List<LoanAgreement> findByUserId (UserId userId);
     List<LoanAgreement> findByBookId (BookId bookId);
-    void save(LoanAgreement loanAgreement);
+    void save();
     void remove(LoanAgreement loanAgreement);
     void add (LoanAgreement loanAgreement);
     void load ();

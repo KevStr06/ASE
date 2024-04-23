@@ -1,5 +1,9 @@
 package org.domain.valueObjects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -8,9 +12,25 @@ import java.util.concurrent.TimeUnit;
 public class ReturnDate {
     private final Date returnDate;
 
+    @JsonCreator
+    private static ReturnDate createInstance(
+            @JsonProperty ("returnDate") Date returnDate
+    ) {
+        //Factory method to force a different constructor signature (workaround)
+        ReturnDate temp = new ReturnDate(returnDate, true);
+        return temp;
+    };
+
     public ReturnDate(Date returnDate) {
         this.returnDate = validateDate(returnDate);
     }
+
+
+    private ReturnDate(Date returnDate, boolean workaround) {
+        this.returnDate = returnDate;
+    }
+
+
 
     private Date validateDate(Date returnDate) {
         Date currentDate = new Date();
@@ -23,7 +43,7 @@ public class ReturnDate {
     public Date getReturnDate() {
         return returnDate;
     }
-
+    @JsonIgnore
     public long getDaysUntilReturnDate() {
         Date currentDate = new Date();
         long diffInMillies = returnDate.getTime() - currentDate.getTime();
