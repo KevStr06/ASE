@@ -3,6 +3,7 @@ package entites;
 import org.domain.entities.Book;
 import org.domain.valueObjects.ISBN;
 import org.domain.valueObjects.LoanAgreementId;
+import org.domain.valueObjects.Name;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class BookUnitTest {
 
     @BeforeEach
     public void setUp() {
-        book = new Book(isbn, title, authorName, authorSurname);
+        book = new Book(isbn, title, new Name(authorName, authorSurname));
     }
 
     @Test
@@ -68,7 +69,7 @@ public class BookUnitTest {
 
     @Test
     public void testTitleNotNullOrEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> new Book(isbn, null, authorName, authorSurname));
-        assertThrows(IllegalArgumentException.class, () -> new Book(isbn, "", authorName, authorSurname));
+        assertThrows(IllegalArgumentException.class, () -> new Book(isbn, null, new Name(authorName, authorSurname)));
+        assertThrows(IllegalArgumentException.class, () -> new Book(isbn, "", new Name(authorName, authorSurname)));
     }
 }

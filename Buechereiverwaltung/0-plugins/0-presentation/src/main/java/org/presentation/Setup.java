@@ -46,6 +46,26 @@ public class Setup {
         bookManagementService.saveBooks();
         loanAgreementManagementService.saveLoanAgreements();
 
+        userManagementService.loadUsers();
+        bookManagementService.loadBooks();
+        loanAgreementManagementService.loadLoanAgreements();
+
+        List<UserId> userIds = userManagementService.getAllUserIds();
+
+        for (UserId userId : userIds) {
+            System.out.println(userManagementService.getUsersFullNameById(userId));
+            List<LoanAgreementId> loanAgreementIdList = loanAgreementManagementService.getLoanAgreementIdsByUserId(userId);
+            StringBuilder message = new StringBuilder();
+            for (LoanAgreementId loanAgreementId : loanAgreementIdList) {
+                BookId bookid = loanAgreementManagementService.getBookIdByLoanAgreementId(loanAgreementId);
+                String bookTitle = bookManagementService.getBookTitleById(bookid);
+                Long daysUntilReturn = loanAgreementManagementService.getDaysUntilReturnDateByLoanAgreementId(loanAgreementId);
+                message.append(bookTitle).append(": ").append(daysUntilReturn).append(" Tage\n");
+            }
+            userManagementService.userReceiveMessageById(userId, message.toString());
+
+        }
+
 
     }
 }
