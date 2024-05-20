@@ -16,11 +16,11 @@ public class Book {
     private final Name author;
     private LoanAgreementId loanAgreementId;
 
-    public Book(String isbn, String title, String authorName, String authorSurname) {
+    public Book(String isbn, String title, Name author) {
         this.id = new BookId();
         this.isbn = new ISBN(isbn);
         this.title = validateTitle(title);
-        this.author = new Name(authorName, authorSurname);
+        this.author = author;
     }
 
     @JsonCreator
