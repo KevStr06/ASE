@@ -13,7 +13,7 @@ import java.util.Date;
 public class LoanAgreement {
     private final LoanAgreementId loanAgreementId;
     @JsonProperty ("loanAgreementReturnDate")
-    private final ReturnDate loanAgreementReturnDate;
+    private ReturnDate loanAgreementReturnDate;
     private final UserId userId;
     private final BookId bookId;
 
