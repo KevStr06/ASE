@@ -3,10 +3,7 @@ package org.domain.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.domain.valueObjects.BookId;
-import org.domain.valueObjects.LoanAgreementId;
-import org.domain.valueObjects.Name;
-import org.domain.valueObjects.UserId;
+import org.domain.valueObjects.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,24 +15,32 @@ public class User {
     private List<LoanAgreementId> loanAgreementIdList;
     @JsonProperty("bookmark")
     private Bookmark bookmark;
+    private final Email email;
+    private final ContactMethodStrategy contactMethodStrategy;
 
-    public User(String name, String surname) {
+    public User(String name, String surname, Email email) {
         this.id = new UserId();
         this.userName = new Name(name, surname);
         this.loanAgreementIdList = new ArrayList<>();
         this.bookmark = new Bookmark();
+        this.email = email;
+        this.contactMethodStrategy = new EmailContactStrategy(email);
     }
 
     @JsonCreator
     private User(
             @JsonProperty("id") UserId id,
             @JsonProperty("userName") Name name,
+            @JsonProperty("email") Email email,
+            @JsonProperty("contactMethodStrategy") ContactMethodStrategy contactMethodStrategy,
             @JsonProperty("loanAgreementIdList") List<LoanAgreementId> loanAgreementIdList,
             @JsonProperty("bookmark") Bookmark bookmark) {
         this.id = id;
         this.userName = name;
         this.loanAgreementIdList = loanAgreementIdList;
         this.bookmark = bookmark;
+        this.email = email;
+        this.contactMethodStrategy = contactMethodStrategy;
     }
 
     @JsonIgnore

@@ -3,6 +3,7 @@ package org.application.services;
 import org.domain.entities.User;
 import org.domain.repositories.UserRepository;
 import org.domain.valueObjects.BookId;
+import org.domain.valueObjects.Email;
 import org.domain.valueObjects.UserId;
 
 import java.util.ArrayList;
@@ -15,8 +16,8 @@ public class UserManagementService {
         this.userRepository = userRepository;
     }
 
-    public UserId createUser(String name, String surname) {
-        User user = new User(name, surname);
+    public UserId createUser(String name, String surname, String email) {
+        User user = new User(name, surname, new Email(email));
         userRepository.add(user);
         return user.getId();
     }

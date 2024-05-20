@@ -2,6 +2,7 @@ package entites;
 
 import org.domain.entities.User;
 import org.domain.valueObjects.BookId;
+import org.domain.valueObjects.Email;
 import org.domain.valueObjects.LoanAgreementId;
 import org.junit.Test;
 
@@ -15,31 +16,36 @@ public class UserUnitTest {
 
     @Test
     public void testGetName() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         assertEquals("John", user.getName());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void invalidEmail() {
+        user = new User("John", "Doe", new Email("john@doemail"));
     }
 
     @Test
     public void testGetSurname() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         assertEquals("Doe", user.getSurname());
     }
 
     @Test
     public void testGetFullName() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         assertEquals("John Doe", user.getFullName());
     }
 
     @Test
     public void testGetIdNotNull() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         assertNotNull(user.getId());
     }
 
     @Test
     public void testRegisterLoanAgreementId() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         LoanAgreementId loanAgreementId = new LoanAgreementId();
         user.registerLoanAgreementId(loanAgreementId);
         List<LoanAgreementId> loanAgreementIdList = user.getLoanAgreementIdList();
@@ -48,7 +54,7 @@ public class UserUnitTest {
 
     @Test
     public void testReturnBookByLoanAgreementId() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         LoanAgreementId loanAgreementId = new LoanAgreementId();
         user.registerLoanAgreementId(loanAgreementId);
         user.returnBookByLoanAgreementId(loanAgreementId);
@@ -58,7 +64,7 @@ public class UserUnitTest {
 
     @Test
     public void testRegisterBookmark() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         BookId bookId = new BookId();
         user.registerBookmark(bookId);
         List<BookId> bookmarks = user.getBookmarks();
@@ -67,7 +73,7 @@ public class UserUnitTest {
 
     @Test
     public void testRemoveBookmark() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         BookId bookId = new BookId();
         user.registerBookmark(bookId);
         user.removeBookmark(bookId);
@@ -77,7 +83,7 @@ public class UserUnitTest {
 
     @Test
     public void testGetBookmarks() {
-        user = new User("John", "Doe");
+        user = new User("John", "Doe", new Email("john@doemail.com"));
         BookId bookId1 = new BookId();
         BookId bookId2 = new BookId();
         user.registerBookmark(bookId1);
