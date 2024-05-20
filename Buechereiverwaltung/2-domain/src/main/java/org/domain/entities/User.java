@@ -13,10 +13,10 @@ import java.util.List;
 
 public class User {
     private final UserId id;
-    @JsonProperty ("userName")
+    @JsonProperty("userName")
     private final Name userName;
     private List<LoanAgreementId> loanAgreementIdList;
-    @JsonProperty ("bookmark")
+    @JsonProperty("bookmark")
     private Bookmark bookmark;
 
     public User(String name, String surname) {
@@ -25,18 +25,19 @@ public class User {
         this.loanAgreementIdList = new ArrayList<>();
         this.bookmark = new Bookmark();
     }
+
     @JsonCreator
     private User(
-            @JsonProperty ("id") UserId id,
-            @JsonProperty ("userName") Name name,
-            @JsonProperty ("loanAgreementIdList") List<LoanAgreementId> loanAgreementIdList,
-            @JsonProperty ("bookmark") Bookmark bookmark)
-            {
+            @JsonProperty("id") UserId id,
+            @JsonProperty("userName") Name name,
+            @JsonProperty("loanAgreementIdList") List<LoanAgreementId> loanAgreementIdList,
+            @JsonProperty("bookmark") Bookmark bookmark) {
         this.id = id;
         this.userName = name;
         this.loanAgreementIdList = loanAgreementIdList;
         this.bookmark = bookmark;
     }
+
     @JsonIgnore
     public String getName() {
         return userName.getName();

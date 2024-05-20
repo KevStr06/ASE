@@ -16,7 +16,7 @@ public class Bookmark {
 
     @JsonCreator
     private Bookmark(
-            @JsonProperty ("bookmarks") List<BookId> bookmarks
+            @JsonProperty("bookmarks") List<BookId> bookmarks
     ) {
         this.bookmarks = new ArrayList<>(bookmarks);
     }

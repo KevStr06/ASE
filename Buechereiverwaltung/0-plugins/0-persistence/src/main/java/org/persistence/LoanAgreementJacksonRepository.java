@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.domain.entities.LoanAgreement;
-import org.domain.entities.User;
 import org.domain.repositories.LoanAgreementRepository;
 import org.domain.valueObjects.BookId;
 import org.domain.valueObjects.LoanAgreementId;
@@ -19,6 +18,7 @@ import java.util.List;
 public class LoanAgreementJacksonRepository implements LoanAgreementRepository {
 
     private final List<LoanAgreement> loanAgreements = new ArrayList<LoanAgreement>();
+
     @Override
     public List<LoanAgreement> listAll() {
         return new ArrayList<>(loanAgreements);
@@ -76,7 +76,8 @@ public class LoanAgreementJacksonRepository implements LoanAgreementRepository {
         mapper.registerModule(new JavaTimeModule());
 
         try (var reader = new FileReader("loanAgreements.save")) {
-            List<LoanAgreement> loadedLoanAgreements = mapper.readValue(reader, new TypeReference<List<LoanAgreement>>() {});
+            List<LoanAgreement> loadedLoanAgreements = mapper.readValue(reader, new TypeReference<List<LoanAgreement>>() {
+            });
             loanAgreements.clear();
             loanAgreements.addAll(loadedLoanAgreements);
         } catch (IOException e) {

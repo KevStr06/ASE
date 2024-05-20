@@ -12,10 +12,10 @@ import java.util.Date;
 
 public class LoanAgreement {
     private final LoanAgreementId loanAgreementId;
-    @JsonProperty ("loanAgreementReturnDate")
-    private ReturnDate loanAgreementReturnDate;
     private final UserId userId;
     private final BookId bookId;
+    @JsonProperty("loanAgreementReturnDate")
+    private ReturnDate loanAgreementReturnDate;
 
 
     public LoanAgreement(UserId userId, BookId bookId, Date loanAgreementReturnDate) {
@@ -27,11 +27,11 @@ public class LoanAgreement {
 
     @JsonCreator
     private LoanAgreement(
-            @JsonProperty ("userId") UserId userId,
-            @JsonProperty ("bookId") BookId bookId,
-            @JsonProperty ("loanAgreementReturnDate") ReturnDate loanAgreementReturnDate,
-            @JsonProperty ("loanAgreementId") LoanAgreementId loanAgreementId
-    ){
+            @JsonProperty("userId") UserId userId,
+            @JsonProperty("bookId") BookId bookId,
+            @JsonProperty("loanAgreementReturnDate") ReturnDate loanAgreementReturnDate,
+            @JsonProperty("loanAgreementId") LoanAgreementId loanAgreementId
+    ) {
         this.userId = userId;
         this.bookId = bookId;
         this.loanAgreementId = loanAgreementId;
@@ -49,6 +49,7 @@ public class LoanAgreement {
     public LoanAgreementId getLoanAgreementId() {
         return loanAgreementId;
     }
+
     @JsonIgnore
     public Date getReturnDate() {
         return loanAgreementReturnDate.getReturnDate();

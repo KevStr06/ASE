@@ -7,7 +7,6 @@ import org.domain.entities.Book;
 import org.domain.repositories.BookRepository;
 import org.domain.valueObjects.BookId;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +17,7 @@ import java.util.List;
 public class BookJacksonJsonRepository implements BookRepository {
 
     private final List<Book> books = new ArrayList<>();
+
     @Override
     public List<Book> listAll() {
         return new ArrayList<>(books);
@@ -34,7 +34,7 @@ public class BookJacksonJsonRepository implements BookRepository {
     @Override
     public List<Book> findByAuthor(String authorName, String authorSurname) {
         return books.stream()
-                .filter(book -> book.getAuthorFullName().equals(authorName+" "+authorSurname))
+                .filter(book -> book.getAuthorFullName().equals(authorName + " " + authorSurname))
                 .toList();
     }
 
@@ -68,7 +68,8 @@ public class BookJacksonJsonRepository implements BookRepository {
         mapper.registerModule(new JavaTimeModule());
 
         try (var reader = new FileReader("books.save")) {
-            List<Book> loadedBooks = mapper.readValue(reader, new TypeReference<List<Book>>() {});
+            List<Book> loadedBooks = mapper.readValue(reader, new TypeReference<List<Book>>() {
+            });
             books.clear();
             books.addAll(loadedBooks);
         } catch (IOException e) {

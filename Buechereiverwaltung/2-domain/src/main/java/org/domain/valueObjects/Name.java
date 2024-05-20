@@ -12,8 +12,8 @@ public class Name {
 
     @JsonCreator
     public Name(
-            @JsonProperty ("name") String name,
-            @JsonProperty ("surname") String surname) {
+            @JsonProperty("name") String name,
+            @JsonProperty("surname") String surname) {
         this.name = validateName(name);
         this.surname = validateName(surname);
     }
@@ -21,9 +21,11 @@ public class Name {
     public String getName() {
         return name;
     }
+
     public String getSurname() {
         return surname;
     }
+
     @JsonIgnore
     public String getFullName() {
         return name + " " + surname;
@@ -31,7 +33,9 @@ public class Name {
 
     private String validateName(String name) {
         if (name == null || name.isEmpty())
-            throw new IllegalArgumentException("Name must not be null or empty");{}
+            throw new IllegalArgumentException("Name must not be null or empty");
+        {
+        }
         name = name.trim();
         return name;
     }

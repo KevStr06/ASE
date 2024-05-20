@@ -10,7 +10,7 @@ public class ISBN {
 
     @JsonCreator
     public ISBN(
-            @JsonProperty ("isbn") String isbn) {
+            @JsonProperty("isbn") String isbn) {
         this.isbn = validateIsbn(isbn);
     }
 
@@ -20,6 +20,7 @@ public class ISBN {
         }
         return isbn;
     }
+
     private boolean isValidISBNStructure(String isbn) {
         int count = 0;
         for (int i = 0; i < isbn.length(); i++) {

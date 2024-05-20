@@ -9,11 +9,18 @@ import java.util.List;
 
 public interface LoanAgreementRepository {
     List<LoanAgreement> listAll();
+
     LoanAgreement findByLoanAgreementId(LoanAgreementId loanAgreementId);
-    List<LoanAgreement> findByUserId (UserId userId);
-    List<LoanAgreement> findByBookId (BookId bookId);
+
+    List<LoanAgreement> findByUserId(UserId userId);
+
+    List<LoanAgreement> findByBookId(BookId bookId);
+
     void save();
+
     void remove(LoanAgreement loanAgreement);
-    void add (LoanAgreement loanAgreement);
-    void load ();
+
+    void add(LoanAgreement loanAgreement);
+
+    void load();
 }

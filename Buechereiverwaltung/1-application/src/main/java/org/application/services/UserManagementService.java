@@ -25,19 +25,19 @@ public class UserManagementService {
         userRepository.load();
     }
 
-    public void saveUsers(){
+    public void saveUsers() {
         userRepository.save();
     }
 
-    public void clearAllUsers(){
-        for (User user: userRepository.listAll()) {
+    public void clearAllUsers() {
+        for (User user : userRepository.listAll()) {
             userRepository.remove(user);
         }
     }
 
     public List<UserId> getAllUserIds() {
         List<UserId> userIds = new ArrayList<>();
-        for (User user: userRepository.listAll()) {
+        for (User user : userRepository.listAll()) {
             userIds.add(user.getId());
         }
         return userIds;

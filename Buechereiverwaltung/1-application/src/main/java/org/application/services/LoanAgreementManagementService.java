@@ -46,7 +46,7 @@ public class LoanAgreementManagementService {
         loanAgreementRepository.load();
     }
 
-    public void saveLoanAgreements(){
+    public void saveLoanAgreements() {
         loanAgreementRepository.save();
     }
 

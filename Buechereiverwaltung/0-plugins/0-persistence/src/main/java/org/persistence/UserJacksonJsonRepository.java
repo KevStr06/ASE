@@ -59,7 +59,8 @@ public class UserJacksonJsonRepository implements UserRepository {
         mapper.registerModule(new JavaTimeModule());
 
         try (var reader = new FileReader("users.save")) {
-            List<User> loadedUsers = mapper.readValue(reader, new TypeReference<List<User>>() {});
+            List<User> loadedUsers = mapper.readValue(reader, new TypeReference<List<User>>() {
+            });
             users.clear();
             users.addAll(loadedUsers);
         } catch (IOException e) {

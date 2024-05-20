@@ -8,13 +8,11 @@ import org.domain.valueObjects.ISBN;
 import org.domain.valueObjects.LoanAgreementId;
 import org.domain.valueObjects.Name;
 
-import java.util.SplittableRandom;
-
 public class Book {
     private final BookId id;
     private final ISBN isbn;
     private final String title;
-    @JsonProperty ("author")
+    @JsonProperty("author")
     private final Name author;
     private LoanAgreementId loanAgreementId;
 
@@ -32,7 +30,7 @@ public class Book {
             @JsonProperty("title") String title,
             @JsonProperty("author") Name author,
             @JsonProperty("loanAgreementId") LoanAgreementId loanAgreementId
-            ) {
+    ) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -40,8 +38,8 @@ public class Book {
         this.loanAgreementId = loanAgreementId;
     }
 
-    private String validateTitle(String title){
-        if(title == null || title.isEmpty()){
+    private String validateTitle(String title) {
+        if (title == null || title.isEmpty()) {
             throw new IllegalArgumentException("Title cannot be null or empty");
         }
         title = title.trim();
@@ -67,7 +65,7 @@ public class Book {
     }
 
     @JsonIgnore
-    public String getAuthorName(){
+    public String getAuthorName() {
         return this.author.getName();
     }
 
