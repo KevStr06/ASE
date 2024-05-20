@@ -1,9 +1,15 @@
 package org.domain.valueObjects;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Email {
+    @JsonProperty("email")
     private final String email;
 
-    public Email(String email) {
+    @JsonCreator
+    public Email(
+            @JsonProperty("email") String email) {
         this.email = validateEmail(email);
     }
 

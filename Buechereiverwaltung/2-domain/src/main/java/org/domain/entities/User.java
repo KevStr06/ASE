@@ -15,23 +15,25 @@ public class User {
     private List<LoanAgreementId> loanAgreementIdList;
     @JsonProperty("bookmark")
     private Bookmark bookmark;
-    private final Email email;
+    @JsonProperty("userEmail")
+    private final Email userEmail;
+    @JsonProperty("contactMethodStrategy")
     private final ContactMethodStrategy contactMethodStrategy;
 
-    public User(String name, String surname, Email email) {
+    public User(String name, String surname, Email userEmail) {
         this.id = new UserId();
         this.userName = new Name(name, surname);
         this.loanAgreementIdList = new ArrayList<>();
         this.bookmark = new Bookmark();
-        this.email = email;
-        this.contactMethodStrategy = new EmailContactStrategy(email);
+        this.userEmail = userEmail;
+        this.contactMethodStrategy = new EmailContactStrategy(userEmail);
     }
 
     @JsonCreator
     private User(
             @JsonProperty("id") UserId id,
             @JsonProperty("userName") Name name,
-            @JsonProperty("email") Email email,
+            @JsonProperty("userEmail") Email userEmail,
             @JsonProperty("contactMethodStrategy") ContactMethodStrategy contactMethodStrategy,
             @JsonProperty("loanAgreementIdList") List<LoanAgreementId> loanAgreementIdList,
             @JsonProperty("bookmark") Bookmark bookmark) {
@@ -39,7 +41,7 @@ public class User {
         this.userName = name;
         this.loanAgreementIdList = loanAgreementIdList;
         this.bookmark = bookmark;
-        this.email = email;
+        this.userEmail = userEmail;
         this.contactMethodStrategy = contactMethodStrategy;
     }
 
