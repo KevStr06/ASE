@@ -21,12 +21,7 @@ public class User {
     private ContactMethodStrategy contactMethodStrategy;
 
     public User(String name, String surname, Email userEmail) {
-        this.id = new UserId();
-        this.userName = new Name(name, surname);
-        this.loanAgreementIdList = new ArrayList<>();
-        this.bookmark = new Bookmark();
-        this.userEmail = userEmail;
-        this.contactMethodStrategy = new EmailContactStrategy(userEmail);
+        this(new UserId(), new Name(name,surname), userEmail, new EmailContactStrategy(userEmail), new ArrayList<LoanAgreementId>(), new Bookmark());
     }
 
     @JsonCreator
