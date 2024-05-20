@@ -68,4 +68,8 @@ public class UserManagementService {
         return userRepository.findByUserId(userId).getBookmarks();
     }
 
+    public void userReceiveMessageById(UserId userId, String message) {
+        userRepository.findByUserId(userId).receiveMessage(message);
+    }
+
 }

@@ -34,11 +34,15 @@ public class Test {
         for (UserId userId : userIds) {
             System.out.println(userManagementService.getUsersFullNameById(userId));
             List<LoanAgreementId> loanAgreementIdList = loanAgreementManagementService.getLoanAgreementIdsByUserId(userId);
+            StringBuilder message = new StringBuilder();
             for (LoanAgreementId loanAgreementId : loanAgreementIdList) {
                 BookId bookid = loanAgreementManagementService.getBookIdByLoanAgreementId(loanAgreementId);
-                System.out.println(bookManagementService.getBookTitleById(bookid));
-                System.out.println("Tage bis das Buch zurückgegeben werden muss "+loanAgreementManagementService.getDaysUntilReturnDateByLoanAgreementId(loanAgreementId));
+                String bookTitle = bookManagementService.getBookTitleById(bookid);
+                Long daysUntilReturn = loanAgreementManagementService.getDaysUntilReturnDateByLoanAgreementId(loanAgreementId);
+                message.append(bookTitle).append(": ").append(daysUntilReturn).append(" Tage\n");
             }
+            userManagementService.userReceiveMessageById(userId, message.toString());
+
         }
 
 

@@ -18,7 +18,7 @@ public class User {
     @JsonProperty("userEmail")
     private final Email userEmail;
     @JsonProperty("contactMethodStrategy")
-    private final ContactMethodStrategy contactMethodStrategy;
+    private ContactMethodStrategy contactMethodStrategy;
 
     public User(String name, String surname, Email userEmail) {
         this.id = new UserId();
@@ -93,6 +93,10 @@ public class User {
             throw new IllegalArgumentException("User has no Loan Agreement with the Id " + loanAgreementId.getId());
         }
         this.loanAgreementIdList.remove(loanAgreementId);
+    }
+
+    public void receiveMessage(String message) {
+        this.contactMethodStrategy.contact(message);
     }
 
 }
